@@ -44,7 +44,9 @@ class ImageForge
             return null;
         }
 
-        return asset($this->path);
+        $sourceUrl = asset($this->path);
+
+        return $this->w === null ? $sourceUrl : $this->forgeUrl($sourceUrl);
     }
 
     private function isEmptyPath(): bool
