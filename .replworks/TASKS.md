@@ -104,7 +104,7 @@ Spec IDs (FR-, ERR-, AC-, SCR-, EL-) refer to PRODUCT_SPEC.md. INV-, F-, RD-, R-
     - A model that uses the integration but declares no fields handles every such call as ERR-002 (ARCHITECTURE.md RD-14).
     - Unit tests passing.
 
-- [ ] T-009 README first-line slot states the package is a client for the Image Forge service
+- [X] T-009 README first-line slot states the package is a client for the Image Forge service
   - Satisfies: PRODUCT_SPEC.md FR-041
   - External boundary: no
   - Acceptance criteria:
