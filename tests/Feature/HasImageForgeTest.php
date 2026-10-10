@@ -29,7 +29,7 @@ class HasImageForgeTest extends TestCase
     {
         config(['imageforge.service' => 'wifinote']);
         $model = new ImageForgeModel(['preview_path' => 'templates/preview.png']);
-        $disk = $this->createMock(FilesystemAdapter::class);
+        $disk = $this->createStub(FilesystemAdapter::class);
         $disk->method('url')->willReturn('https://cdn.example.test/storage/templates/preview.png');
         Storage::shouldReceive('disk')->once()->withNoArgs()->andReturn($disk);
 

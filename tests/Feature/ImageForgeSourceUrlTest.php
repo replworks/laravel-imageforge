@@ -98,7 +98,7 @@ class ImageForgeSourceUrlTest extends TestCase
 
     public function test_other_options_do_not_change_a_source_url_when_width_is_absent(): void
     {
-        $disk = $this->createMock(FilesystemAdapter::class);
+        $disk = $this->createStub(FilesystemAdapter::class);
         $disk->method('url')->willReturn('https://wifinote.test/storage/templates/preview.png');
         Storage::shouldReceive('disk')->once()->withNoArgs()->andReturn($disk);
 
