@@ -73,6 +73,33 @@ class HasImageForgeTest extends TestCase
 
         $model->previewPathImageForge(320);
     }
+
+    public function test_an_undeclared_field_is_handled_by_eloquent(): void
+    {
+        $model = new ImageForgeModel;
+
+        $this->expectException(\BadMethodCallException::class);
+
+        $model->coverPathImageForge(320);
+    }
+
+    public function test_the_default_field_method_is_not_provided(): void
+    {
+        $model = new ImageForgeModel;
+
+        $this->expectException(\BadMethodCallException::class);
+
+        $model->imageForge(320);
+    }
+
+    public function test_a_model_without_declared_fields_handles_every_field_as_undeclared(): void
+    {
+        $model = new ImageForgeModelWithoutFields;
+
+        $this->expectException(\BadMethodCallException::class);
+
+        $model->previewPathImageForge(320);
+    }
 }
 
 class ImageForgeModel extends Model
@@ -87,4 +114,9 @@ class ImageForgeModel extends Model
     {
         return 'accessor/should-not-be-used.png';
     }
+}
+
+class ImageForgeModelWithoutFields extends Model
+{
+    use HasImageForge;
 }
