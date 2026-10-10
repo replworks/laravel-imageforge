@@ -94,7 +94,7 @@ Spec IDs (FR-, ERR-, AC-, SCR-, EL-) refer to PRODUCT_SPEC.md. INV-, F-, RD-, R-
     - Method-name matching follows ARCHITECTURE.md Section 6.2.
     - Unit tests passing.
 
-- [ ] T-008 Calls for undeclared fields and for a default-field method are not handled by the product
+- [X] T-008 Calls for undeclared fields and for a default-field method are not handled by the product
   - Satisfies: PRODUCT_SPEC.md SCR-002; FR-037, FR-038; ERR-002
   - External boundary: no
   - Acceptance criteria:
