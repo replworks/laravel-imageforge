@@ -44,7 +44,7 @@ Spec IDs (FR-, ERR-, AC-, SCR-, EL-) refer to PRODUCT_SPEC.md. INV-, F-, RD-, R-
     - A builder works without any model integration (FR-040).
     - Unit tests passing.
 
-- [ ] T-004 Developer obtains a Forge URL from a storage-based Builder
+- [X] T-004 Developer obtains a Forge URL from a storage-based Builder
   - Satisfies: PRODUCT_SPEC.md SCR-001 (EL-002); FR-008, FR-013, FR-014, FR-015, FR-018; ERR-001; ERR-003
   - External boundary: no
   - Acceptance criteria:
