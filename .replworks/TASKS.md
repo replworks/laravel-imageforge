@@ -80,7 +80,7 @@ Spec IDs (FR-, ERR-, AC-, SCR-, EL-) refer to PRODUCT_SPEC.md. INV-, F-, RD-, R-
     - The result's Origin Path comes from the asset-based Source URL, not the storage-based one (FR-015).
     - Unit tests passing.
 
-- [ ] T-007 Developer calls a generated method per declared model field
+- [X] T-007 Developer calls a generated method per declared model field
   - Satisfies: PRODUCT_SPEC.md SCR-002 (EL-004, EL-005, EL-006); FR-031, FR-033, FR-034, FR-035, FR-036, FR-039
   - External boundary: no
   - Acceptance criteria:
