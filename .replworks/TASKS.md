@@ -70,7 +70,7 @@ Spec IDs (FR-, ERR-, AC-, SCR-, EL-) refer to PRODUCT_SPEC.md. INV-, F-, RD-, R-
     - Option values the Image Forge service treats specially (out of range, unknown fit or f) produce no error in the product (ARCHITECTURE.md Section 8).
     - Unit tests passing.
 
-- [ ] T-006 Developer obtains a Forge URL from an asset-based Builder
+- [X] T-006 Developer obtains a Forge URL from an asset-based Builder
   - Satisfies: PRODUCT_SPEC.md SCR-001 (EL-003); FR-012; ERR-001
   - External boundary: no
   - Acceptance criteria:
