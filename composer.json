@@ -1,42 +1,42 @@
 {
-    "name": "replworks/laravel-imageforge",
-    "description": "A Laravel client for the Image Forge service.",
-    "type": "library",
-    "license": "MIT",
-    "require": {
-        "php": "^8.3",
-        "illuminate/contracts": "^12.0",
-        "illuminate/database": "^12.0",
-        "illuminate/filesystem": "^12.0",
-        "illuminate/routing": "^12.0",
-        "illuminate/support": "^12.0"
-    },
-    "require-dev": {
-        "laravel/pint": "^1.0",
-        "orchestra/testbench": "^10.0",
-        "phpunit/phpunit": "^11.5.3 || ^12.0.1"
-    },
-    "autoload": {
-        "psr-4": {
-            "Replworks\\ImageForge\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Replworks\\ImageForge\\Tests\\": "tests/"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Replworks\\ImageForge\\ImageForgeServiceProvider"
-            ]
-        }
-    },
-    "minimum-stability": "stable",
-    "prefer-stable": true,
-    "scripts": {
-        "test": "phpunit --configuration phpunit.xml.dist",
-        "format": "pint"
+  "name": "replworks/laravel-imageforge",
+  "description": "A Laravel client for the Image Forge service.",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": "^8.3",
+    "illuminate/contracts": "^12.0",
+    "illuminate/database": "^12.0",
+    "illuminate/filesystem": "^12.0",
+    "illuminate/routing": "^12.0",
+    "illuminate/support": "^12.0"
+  },
+  "require-dev": {
+    "laravel/pint": "^1.0",
+    "orchestra/testbench": "^10.0",
+    "phpunit/phpunit": "^11.5.3 || ^12.0.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Replworks\\ImageForge\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Replworks\\ImageForge\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Replworks\\ImageForge\\ImageForgeServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "scripts": {
+    "test": "phpunit --configuration phpunit.xml.dist",
+    "format": "pint"
+  }
 }
