@@ -1,12 +1,20 @@
+This package is a client for the Image Forge service.
+
 # Laravel ImageForge
 
 [![code-style](https://github.com/replworks/laravel-imageforge/actions/workflows/code-style.yml/badge.svg)](https://github.com/replworks/laravel-imageforge/actions/workflows/code-style.yml)
 [![tests](https://github.com/replworks/laravel-imageforge/actions/workflows/tests.yml/badge.svg)](https://github.com/replworks/laravel-imageforge/actions/workflows/tests.yml)
 [![update-changelog](https://github.com/replworks/laravel-imageforge/actions/workflows/update-changelog.yml/badge.svg)](https://github.com/replworks/laravel-imageforge/actions/workflows/update-changelog.yml)
 
-Generate Image Forge URLs from image paths stored on Laravel models or from direct application code.
+Laravel ImageForge is the Laravel client library for [Image Forge](https://if.repl.net), an image conversion service. It generates Image Forge URLs from image paths stored on Laravel models or from direct application code.
+
+Image Forge is built in the REPLWorks way. The service and its making are introduced in the [REPLWorks Image Forge showcase](https://www.repl.net/showcase/imageforge/).
 
 Official Image Forge service guidance and settings can be found at [if.repl.net](https://if.repl.net).
+
+## Prerequisite
+
+Before using this package, register your application's domain with Image Forge at [if.repl.net](https://if.repl.net). Use the service identifier issued for that registered domain as `IMAGEFORGE_SERVICE` in your Laravel application.
 
 ## Requirements
 
