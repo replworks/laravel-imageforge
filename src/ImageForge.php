@@ -71,7 +71,21 @@ class ImageForge
 
         $baseUrl = config('imageforge.base_url');
         $originPath = parse_url($sourceUrl, PHP_URL_PATH);
+        $options = [
+            'w' => $this->w,
+            'h' => $this->h,
+            'fit' => $this->fit,
+            'q' => $this->q,
+            'f' => $this->f,
+        ];
+        $query = [];
 
-        return $baseUrl.'/'.$service.$originPath.'?w='.$this->w;
+        foreach ($options as $name => $value) {
+            if ($value !== null) {
+                $query[] = $name.'='.$value;
+            }
+        }
+
+        return $baseUrl.'/'.$service.$originPath.'?'.implode('&', $query);
     }
 }

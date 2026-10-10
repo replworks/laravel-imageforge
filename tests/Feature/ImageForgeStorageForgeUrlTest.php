@@ -37,6 +37,39 @@ class ImageForgeStorageForgeUrlTest extends TestCase
         );
     }
 
+    public function test_all_options_are_rendered_in_the_declared_order(): void
+    {
+        config(['imageforge.service' => 'wifinote']);
+        $this->mockStorageUrl('https://cdn.example.test/storage/templates/preview.png');
+
+        $this->assertSame(
+            'https://img.repl.net/wifinote/storage/templates/preview.png?w=320&h=240&fit=fill&q=80&f=webp',
+            ImageForge::make('templates/preview.png', 320, 240, 'fill', 80, 'webp')->storage(),
+        );
+    }
+
+    public function test_null_options_are_omitted_from_the_query(): void
+    {
+        config(['imageforge.service' => 'wifinote']);
+        $this->mockStorageUrl('https://cdn.example.test/storage/templates/preview.png');
+
+        $this->assertSame(
+            'https://img.repl.net/wifinote/storage/templates/preview.png?w=320&q=80',
+            ImageForge::make('templates/preview.png', 320, q: 80)->storage(),
+        );
+    }
+
+    public function test_option_values_are_not_validated_or_encoded(): void
+    {
+        config(['imageforge.service' => 'wifinote']);
+        $this->mockStorageUrl('https://cdn.example.test/storage/templates/preview.png');
+
+        $this->assertSame(
+            'https://img.repl.net/wifinote/storage/templates/preview.png?w=320&fit=invalid&f=raw&x',
+            ImageForge::make('templates/preview.png', 320, fit: 'invalid', f: 'raw&x')->storage(),
+        );
+    }
+
     public function test_source_url_query_and_fragment_are_not_copied(): void
     {
         config(['imageforge.service' => 'wifinote']);

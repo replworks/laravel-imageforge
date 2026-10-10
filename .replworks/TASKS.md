@@ -58,7 +58,7 @@ Spec IDs (FR-, ERR-, AC-, SCR-, EL-) refer to PRODUCT_SPEC.md. INV-, F-, RD-, R-
     - Changing a setting between two calls on the same Builder changes the second result (ARCHITECTURE.md R-04, R-05, INV-14).
     - Unit tests passing.
 
-- [ ] T-005 Developer controls the Forge URL query with h, fit, q and f
+- [X] T-005 Developer controls the Forge URL query with h, fit, q and f
   - Satisfies: PRODUCT_SPEC.md Forge URL structure (Outputs); FR-016, FR-017, FR-019
   - External boundary: no
   - Acceptance criteria:
