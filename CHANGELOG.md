@@ -1,5 +1,13 @@
 # Release Notes
 
+## v1.1.0 - 2026-10-10
+
+### What's Changed
+
+* feat: add raw Blade directives for unescaped Forge URLs and corresponding tests by [@cable8mm](https://github.com/cable8mm) in https://github.com/replworks/laravel-imageforge/pull/14
+
+**Full Changelog**: https://github.com/replworks/laravel-imageforge/compare/v1.0.0...v1.1.0
+
 ## v1.0.0 - 2026-10-10
 
 ### What's Changed
