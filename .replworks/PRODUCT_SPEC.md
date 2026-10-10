@@ -177,6 +177,18 @@ The product has no graphical screens. The following surfaces are the interfaces 
   - EL-009 -> the service provider is registered by auto-discovery without manual registration.
   - EL-010 -> config/imageforge.php is created in the application.
 
+### SCR-005
+
+- ID: SCR-005
+- Purpose: Generate Forge URLs directly in Blade templates.
+- Elements:
+  - EL-011: Blade directive `@imageForgeAsset($path, $w, $h, $fit, $q, $f)`. Purpose: generate a Forge URL using Laravel's `asset()` Source URL. User actions: call in a Blade template with the Image Path and optional Options.
+  - EL-012: Blade directive `@imageForgeStorage($path, $w, $h, $fit, $q, $f)`. Purpose: generate a Forge URL using the configured storage-disk Source URL. User actions: call in a Blade template with the Image Path and optional Options.
+- Interactions:
+  - EL-011 -> `ImageForge::make($path, $w, $h, $fit, $q, $f)->asset()` and HTML-escaped output.
+  - EL-012 -> `ImageForge::make($path, $w, $h, $fit, $q, $f)->storage()` and HTML-escaped output.
+  - Both directives support the positional and named Options supported by `ImageForge::make()`.
+
 ## Functional Requirements
 
 - FR-001: `ImageForge::make()` MUST return an ImageForge instance.
@@ -220,6 +232,9 @@ The product has no graphical screens. The following surfaces are the interfaces 
 - FR-039: The product MUST NOT require Eloquent casts.
 - FR-040: A Developer MUST be able to use `ImageForge::make()` without the Trait.
 - FR-041: The README first line MUST state that the package is a client for the Image Forge service.
+- FR-042: The product MUST provide a Blade directive named `imageForgeAsset` that renders the HTML-escaped result of `ImageForge::make()` followed by `asset()`.
+- FR-043: The product MUST provide a Blade directive named `imageForgeStorage` that renders the HTML-escaped result of `ImageForge::make()` followed by `storage()`.
+- FR-044: The Blade directives MUST accept the Image Path and Options in the same positional and named forms as `ImageForge::make()`.
 
 ## User Flows
 

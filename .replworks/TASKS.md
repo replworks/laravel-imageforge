@@ -110,3 +110,13 @@ Spec IDs (FR-, ERR-, AC-, SCR-, EL-) refer to PRODUCT_SPEC.md. INV-, F-, RD-, R-
   - Acceptance criteria:
     - AC-027 passes.
     - The wording beyond what AC-027 checks is not part of this task (human-owned, AGENTS.md HUMAN_OWNED_CHANGES).
+
+- [X] T-010 Developer generates Forge URLs with Blade directives
+  - Satisfies: PRODUCT_SPEC.md SCR-005 (EL-011, EL-012); FR-042, FR-043, FR-044
+  - External boundary: no
+  - Acceptance criteria:
+    - `@imageForgeAsset()` renders the HTML-escaped result of `ImageForge::make(...)->asset()`.
+    - `@imageForgeStorage()` renders the HTML-escaped result of `ImageForge::make(...)->storage()`.
+    - Both directives support positional and named Options.
+    - Empty paths render no URL, and existing Builder errors propagate.
+    - Unit tests passing.
