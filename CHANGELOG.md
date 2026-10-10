@@ -1,5 +1,15 @@
 # Release Notes
 
+## v1.0.0 - 2026-10-10
+
+### What's Changed
+
+* docs: enhance README for clarity and structure by [@cable8mm](https://github.com/cable8mm) in https://github.com/replworks/laravel-imageforge/pull/11
+* feat: add Blade directives for generating Forge URLs and corresponding tests by [@cable8mm](https://github.com/cable8mm) in https://github.com/replworks/laravel-imageforge/pull/12
+* chore: update .gitignore to include .vscode and remove settings.json by [@cable8mm](https://github.com/cable8mm) in https://github.com/replworks/laravel-imageforge/pull/13
+
+**Full Changelog**: https://github.com/replworks/laravel-imageforge/compare/v0.1.0...v1.0.0
+
 ## v0.1.0 - 2026-10-10
 
 ### What's Changed
