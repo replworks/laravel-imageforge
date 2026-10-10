@@ -25,7 +25,7 @@ Spec IDs (FR-, ERR-, AC-, SCR-, EL-) refer to PRODUCT_SPEC.md. INV-, F-, RD-, R-
     - Environment values are read only by the Settings Definition (ARCHITECTURE.md R-03).
     - Unit tests passing.
 
-- [ ] T-003 Developer obtains a Source URL, or null, from a Builder
+- [X] T-003 Developer obtains a Source URL, or null, from a Builder
   - Satisfies: PRODUCT_SPEC.md SCR-001 (EL-001, EL-002, EL-003); FR-001, FR-002, FR-003, FR-004, FR-005, FR-006, FR-007, FR-009, FR-010, FR-011, FR-020, FR-021, FR-032, FR-040
   - External boundary: no
   - Acceptance criteria:
