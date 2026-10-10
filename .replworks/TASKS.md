@@ -13,7 +13,7 @@ Spec IDs (FR-, ERR-, AC-, SCR-, EL-) refer to PRODUCT_SPEC.md. INV-, F-, RD-, R-
     - AC-026 passes.
     - AC-028 passes.
 
-- [ ] T-002 Developer configures the product through environment variables and an optional published config
+- [X] T-002 Developer configures the product through environment variables and an optional published config
   - Satisfies: PRODUCT_SPEC.md SCR-003, SCR-004 (EL-010); FR-022, FR-023, FR-024, FR-025, FR-026, FR-027, FR-028, FR-029, FR-030
   - External boundary: no
   - Acceptance criteria:
