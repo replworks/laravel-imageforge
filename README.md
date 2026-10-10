@@ -90,6 +90,17 @@ $url = ImageForge::make('templates/preview.png', 320)->asset();
 // https://img.repl.net/wifinote/templates/preview.png?w=320
 ```
 
+### Blade directives
+
+For direct use in Blade templates, the package provides two directives:
+
+```blade
+@imageForgeAsset('assets/seo/og.png', w: 1200, h: 630, f: 'jpeg')
+@imageForgeStorage('uploads/og.png', w: 1200, h: 630)
+```
+
+`@imageForgeAsset` uses Laravel's `asset()` Source URL, while `@imageForgeStorage` uses the configured storage disk. Both directives accept the same positional and named Options as `ImageForge::make()` and HTML-escape the rendered URL.
+
 ### Options
 
 Options are rendered in the order `w`, `h`, `fit`, `q`, `f`. Options with a `null` value are omitted.

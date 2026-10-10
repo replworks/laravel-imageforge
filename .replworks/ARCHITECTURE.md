@@ -83,7 +83,7 @@ Package present in application
 | C4  | Settings Access               | Product component | FR-013, FR-014, FR-020, FR-021                          |
 | C5  | Settings Definition           | Product component | FR-022..FR-029, EL-007, EL-008                          |
 | C6  | Field Binding (HasImageForge) | Product component | EL-004, EL-005, EL-006, FR-031, FR-033..FR-039, ERR-002 |
-| C7  | Registration                  | Product component | FR-029, FR-030, EL-009, EL-010                          |
+| C7  | Registration                  | Product component | FR-029, FR-030, FR-042..FR-044, EL-009..EL-012          |
 
 External capabilities (NOT components of this product; the product consumes them and never reimplements them):
 
@@ -104,7 +104,7 @@ Dependency direction (a component may call only those listed):
 - C4 -> X3
 - C5 -> X3 (definition only)
 - C6 -> C1 (entry only), X4, X5
-- C7 -> C5
+- C7 -> C5, C1
 
 No other dependency is allowed. In particular: C2 and C3 never call each other. C1 never reads Settings. C6 never calls C2, C3, or C4.
 
@@ -304,6 +304,7 @@ No other dependency is allowed. In particular: C2 and C3 never call each other. 
 
 - Make C5 active in the application automatically on installation, with no manual registration step (FR-030, FR-025).
 - Offer the publish action that copies C5 into the application (FR-029).
+- Register the `imageForgeAsset` and `imageForgeStorage` Blade directives (FR-042..FR-044).
 
 **Inputs**
 

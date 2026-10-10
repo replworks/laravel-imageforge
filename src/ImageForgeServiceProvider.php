@@ -2,6 +2,7 @@
 
 namespace Replworks\ImageForge;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class ImageForgeServiceProvider extends ServiceProvider
@@ -16,5 +17,13 @@ class ImageForgeServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/imageforge.php' => config_path('imageforge.php'),
         ], 'imageforge-config');
+
+        Blade::directive('imageForgeAsset', static function ($expression): string {
+            return "<?php echo e(\\Replworks\\ImageForge\\ImageForge::make({$expression})->asset()); ?>";
+        });
+
+        Blade::directive('imageForgeStorage', static function ($expression): string {
+            return "<?php echo e(\\Replworks\\ImageForge\\ImageForge::make({$expression})->storage()); ?>";
+        });
     }
 }
