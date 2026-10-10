@@ -92,7 +92,7 @@ $url = ImageForge::make('templates/preview.png', 320)->asset();
 
 ### Blade directives
 
-For direct use in Blade templates, the package provides two directives:
+For direct use in Blade templates, the package provides escaped directives:
 
 ```blade
 @imageForgeAsset('assets/seo/og.png', w: 1200, h: 630, f: 'jpeg')
@@ -100,6 +100,16 @@ For direct use in Blade templates, the package provides two directives:
 ```
 
 `@imageForgeAsset` uses Laravel's `asset()` Source URL, while `@imageForgeStorage` uses the configured storage disk. Both directives accept the same positional and named Options as `ImageForge::make()` and HTML-escape the rendered URL.
+
+When a generated URL is captured in a section or variable and will be escaped later with Blade's `{{ }}` echo, use the corresponding raw directive:
+
+```blade
+@section('meta_image')
+    @imageForgeAssetRaw('assets/seo/og.png', w: 1200, h: 630)
+@endsection
+```
+
+The package also provides `@imageForgeStorageRaw()`. Raw directives do not HTML-escape their output. Use them only for trusted Image Forge URLs and escape the value once at its final HTML output location.
 
 ### Options
 

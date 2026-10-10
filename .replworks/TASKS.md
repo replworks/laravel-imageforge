@@ -120,3 +120,13 @@ Spec IDs (FR-, ERR-, AC-, SCR-, EL-) refer to PRODUCT_SPEC.md. INV-, F-, RD-, R-
     - Both directives support positional and named Options.
     - Empty paths render no URL, and existing Builder errors propagate.
     - Unit tests passing.
+
+- [X] T-011 Developer captures Forge URLs with raw Blade directives
+  - Satisfies: PRODUCT_SPEC.md SCR-005 (EL-013, EL-014); FR-045, FR-046, FR-047
+  - External boundary: no
+  - Acceptance criteria:
+    - `@imageForgeAssetRaw()` renders the unescaped result of `ImageForge::make(...)->asset()`.
+    - `@imageForgeStorageRaw()` renders the unescaped result of `ImageForge::make(...)->storage()`.
+    - Both raw directives support positional and named Options.
+    - Empty paths render no URL.
+    - Unit tests passing.

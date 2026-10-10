@@ -184,9 +184,13 @@ The product has no graphical screens. The following surfaces are the interfaces 
 - Elements:
   - EL-011: Blade directive `@imageForgeAsset($path, $w, $h, $fit, $q, $f)`. Purpose: generate a Forge URL using Laravel's `asset()` Source URL. User actions: call in a Blade template with the Image Path and optional Options.
   - EL-012: Blade directive `@imageForgeStorage($path, $w, $h, $fit, $q, $f)`. Purpose: generate a Forge URL using the configured storage-disk Source URL. User actions: call in a Blade template with the Image Path and optional Options.
+  - EL-013: Blade directive `@imageForgeAssetRaw($path, $w, $h, $fit, $q, $f)`. Purpose: generate an unescaped Forge URL using Laravel's `asset()` Source URL for later final-output escaping. User actions: call in a Blade template with the Image Path and optional Options.
+  - EL-014: Blade directive `@imageForgeStorageRaw($path, $w, $h, $fit, $q, $f)`. Purpose: generate an unescaped Forge URL using the configured storage-disk Source URL for later final-output escaping. User actions: call in a Blade template with the Image Path and optional Options.
 - Interactions:
   - EL-011 -> `ImageForge::make($path, $w, $h, $fit, $q, $f)->asset()` and HTML-escaped output.
   - EL-012 -> `ImageForge::make($path, $w, $h, $fit, $q, $f)->storage()` and HTML-escaped output.
+  - EL-013 -> `ImageForge::make($path, $w, $h, $fit, $q, $f)->asset()` and unescaped output.
+  - EL-014 -> `ImageForge::make($path, $w, $h, $fit, $q, $f)->storage()` and unescaped output.
   - Both directives support the positional and named Options supported by `ImageForge::make()`.
 
 ## Functional Requirements
@@ -235,6 +239,9 @@ The product has no graphical screens. The following surfaces are the interfaces 
 - FR-042: The product MUST provide a Blade directive named `imageForgeAsset` that renders the HTML-escaped result of `ImageForge::make()` followed by `asset()`.
 - FR-043: The product MUST provide a Blade directive named `imageForgeStorage` that renders the HTML-escaped result of `ImageForge::make()` followed by `storage()`.
 - FR-044: The Blade directives MUST accept the Image Path and Options in the same positional and named forms as `ImageForge::make()`.
+- FR-045: The product MUST provide a Blade directive named `imageForgeAssetRaw` that renders the unescaped result of `ImageForge::make()` followed by `asset()`.
+- FR-046: The product MUST provide a Blade directive named `imageForgeStorageRaw` that renders the unescaped result of `ImageForge::make()` followed by `storage()`.
+- FR-047: The raw Blade directives MUST accept the Image Path and Options in the same positional and named forms as `ImageForge::make()`.
 
 ## User Flows
 

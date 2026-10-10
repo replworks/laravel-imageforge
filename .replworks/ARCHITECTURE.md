@@ -304,7 +304,7 @@ No other dependency is allowed. In particular: C2 and C3 never call each other. 
 
 - Make C5 active in the application automatically on installation, with no manual registration step (FR-030, FR-025).
 - Offer the publish action that copies C5 into the application (FR-029).
-- Register the `imageForgeAsset` and `imageForgeStorage` Blade directives (FR-042..FR-044).
+- Register the `imageForgeAsset`, `imageForgeStorage`, `imageForgeAssetRaw`, and `imageForgeStorageRaw` Blade directives (FR-042..FR-047).
 
 **Inputs**
 

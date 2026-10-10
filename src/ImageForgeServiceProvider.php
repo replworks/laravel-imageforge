@@ -25,5 +25,13 @@ class ImageForgeServiceProvider extends ServiceProvider
         Blade::directive('imageForgeStorage', static function ($expression): string {
             return "<?php echo e(\\Replworks\\ImageForge\\ImageForge::make({$expression})->storage()); ?>";
         });
+
+        Blade::directive('imageForgeAssetRaw', static function ($expression): string {
+            return "<?php echo \\Replworks\\ImageForge\\ImageForge::make({$expression})->asset(); ?>";
+        });
+
+        Blade::directive('imageForgeStorageRaw', static function ($expression): string {
+            return "<?php echo \\Replworks\\ImageForge\\ImageForge::make({$expression})->storage(); ?>";
+        });
     }
 }
