@@ -3,6 +3,7 @@
 namespace Replworks\ImageForge;
 
 use Illuminate\Support\Facades\Storage;
+use InvalidArgumentException;
 
 class ImageForge
 {
@@ -28,24 +29,49 @@ class ImageForge
 
     public function storage(): ?string
     {
-        if ($this->path === null || $this->path === '') {
+        if ($this->isEmptyPath()) {
             return null;
         }
 
-        $disk = config('imageforge.disk');
-        $sourceUrl = $disk === null
-            ? Storage::disk()->url($this->path)
-            : Storage::disk($disk)->url($this->path);
+        $sourceUrl = $this->storageSourceUrl();
 
-        return $sourceUrl;
+        return $this->w === null ? $sourceUrl : $this->forgeUrl($sourceUrl);
     }
 
     public function asset(): ?string
     {
-        if ($this->path === null || $this->path === '') {
+        if ($this->isEmptyPath()) {
             return null;
         }
 
         return asset($this->path);
+    }
+
+    private function isEmptyPath(): bool
+    {
+        return $this->path === null || $this->path === '';
+    }
+
+    private function storageSourceUrl(): string
+    {
+        $disk = config('imageforge.disk');
+
+        return $disk === null
+            ? Storage::disk()->url($this->path)
+            : Storage::disk($disk)->url($this->path);
+    }
+
+    private function forgeUrl(string $sourceUrl): string
+    {
+        $service = config('imageforge.service');
+
+        if ($service === null || $service === '') {
+            throw new InvalidArgumentException('The imageforge.service setting must be configured.');
+        }
+
+        $baseUrl = config('imageforge.base_url');
+        $originPath = parse_url($sourceUrl, PHP_URL_PATH);
+
+        return $baseUrl.'/'.$service.$originPath.'?w='.$this->w;
     }
 }
