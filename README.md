@@ -96,13 +96,13 @@ $url = ImageForge::make('templates/preview.png', 320)->asset();
 For ordinary Blade images, add Utility Classes to the `<img>` element. The tag is scanned when Blade compiles the view, and the URL is resolved when the compiled view renders:
 
 ```blade
-<img src="photo.jpg" class="rounded if-w-480 if-h-320 if-crop" alt="">
+<img src="/images/photo.jpg" class="rounded if-w-480 if-h-320 if-crop" alt="">
 ```
 
 This renders an escaped URL like:
 
 ```html
-<img src="https://img.repl.net/wifinote/photo.jpg?w=480&amp;h=320&amp;fit=fill" class="rounded" alt="">
+<img src="https://img.repl.net/wifinote/images/photo.jpg?w=480&amp;h=320&amp;fit=fill" class="rounded" alt="">
 ```
 
 Supported Utility Classes are:
