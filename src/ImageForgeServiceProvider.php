@@ -4,6 +4,7 @@ namespace Replworks\ImageForge;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Replworks\ImageForge\Blade\UtilityClassPrecompiler;
 
 class ImageForgeServiceProvider extends ServiceProvider
 {
@@ -18,20 +19,7 @@ class ImageForgeServiceProvider extends ServiceProvider
             __DIR__.'/../config/imageforge.php' => config_path('imageforge.php'),
         ], 'imageforge-config');
 
-        Blade::directive('imageForgeAsset', static function ($expression): string {
-            return "<?php echo e(\\Replworks\\ImageForge\\ImageForge::make({$expression})->asset()); ?>";
-        });
-
-        Blade::directive('imageForgeStorage', static function ($expression): string {
-            return "<?php echo e(\\Replworks\\ImageForge\\ImageForge::make({$expression})->storage()); ?>";
-        });
-
-        Blade::directive('imageForgeAssetRaw', static function ($expression): string {
-            return "<?php echo \\Replworks\\ImageForge\\ImageForge::make({$expression})->asset(); ?>";
-        });
-
-        Blade::directive('imageForgeStorageRaw', static function ($expression): string {
-            return "<?php echo \\Replworks\\ImageForge\\ImageForge::make({$expression})->storage(); ?>";
-        });
+        Blade::precompiler(static fn (string $template): string => UtilityClassPrecompiler::compile($template)
+        );
     }
 }

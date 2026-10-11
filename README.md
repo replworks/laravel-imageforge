@@ -6,7 +6,7 @@ This package is a client for the Image Forge service.
 [![tests](https://github.com/replworks/laravel-imageforge/actions/workflows/tests.yml/badge.svg)](https://github.com/replworks/laravel-imageforge/actions/workflows/tests.yml)
 [![update-changelog](https://github.com/replworks/laravel-imageforge/actions/workflows/update-changelog.yml/badge.svg)](https://github.com/replworks/laravel-imageforge/actions/workflows/update-changelog.yml)
 
-Laravel ImageForge is the Laravel client library for [Image Forge](https://if.repl.net), an image conversion service. It generates Image Forge URLs from image paths stored on Laravel models or from direct application code.
+Laravel ImageForge is the Laravel client library for [Image Forge](https://if.repl.net), an image conversion service. It generates Image Forge URLs from Blade image classes or direct application code.
 
 Image Forge is built in the REPLWorks way. The service and its making are introduced in the [REPLWorks Image Forge showcase](https://www.repl.net/showcase/imageforge/).
 
@@ -59,6 +59,7 @@ This creates `config/imageforge.php` with the following settings:
 | `imageforge.base_url` | `IMAGEFORGE_BASE_URL` | `https://img.repl.net`   |
 | `imageforge.service`  | `IMAGEFORGE_SERVICE`  | none                     |
 | `imageforge.disk`     | `IMAGEFORGE_DISK`     | application default disk |
+| `imageforge.dsl_prefix` | none                  | `if-`                    |
 
 ## Usage
 
@@ -90,26 +91,46 @@ $url = ImageForge::make('templates/preview.png', 320)->asset();
 // https://img.repl.net/wifinote/templates/preview.png?w=320
 ```
 
-### Blade directives
+### Blade Utility Class DSL
 
-For direct use in Blade templates, the package provides escaped directives:
-
-```blade
-@imageForgeAsset('assets/seo/og.png', w: 1200, h: 630, f: 'jpeg')
-@imageForgeStorage('uploads/og.png', w: 1200, h: 630)
-```
-
-`@imageForgeAsset` uses Laravel's `asset()` Source URL, while `@imageForgeStorage` uses the configured storage disk. Both directives accept the same positional and named Options as `ImageForge::make()` and HTML-escape the rendered URL.
-
-When a generated URL is captured in a section or variable and will be escaped later with Blade's `{{ }}` echo, use the corresponding raw directive:
+For ordinary Blade images, add Utility Classes to the `<img>` element. The tag is scanned when Blade compiles the view, and the URL is resolved when the compiled view renders:
 
 ```blade
-@section('meta_image')
-    @imageForgeAssetRaw('assets/seo/og.png', w: 1200, h: 630)
-@endsection
+<img src="photo.jpg" class="rounded if-w-480 if-h-320 if-crop" alt="">
 ```
 
-The package also provides `@imageForgeStorageRaw()`. Raw directives do not HTML-escape their output. Use them only for trusted Image Forge URLs and escape the value once at its final HTML output location.
+This renders an escaped URL like:
+
+```html
+<img src="https://img.repl.net/wifinote/photo.jpg?w=480&amp;h=320&amp;fit=fill" class="rounded" alt="">
+```
+
+Supported Utility Classes are:
+
+| Utility Class | Image Forge option | Description |
+| --- | --- | --- |
+| `if-w-{0..2000}` | `w={n}` | Width; values are clamped to `0..2000`. |
+| `if-h-{0..2000}` | `h={n}` | Height; values are clamped to `0..2000`. |
+| `if-q-{1..100}` | `q={n}` | Quality; values are clamped to `1..100`. |
+| `if-fit` | `fit=fit` | Fit without cropping. |
+| `if-fill` | `fit=fill` | Fill the requested dimensions. |
+| `if-crop` | `fit=fill` | Alias for `if-fill`. |
+| `if-fit-auto` | `fit=auto` | Let Image Forge choose the fit behavior. |
+| `if-webp` | `f=webp` | Request WebP output. |
+| `if-avif` | `f=avif` | Request AVIF output. |
+| `if-jpeg` | `f=jpeg` | Request JPEG output. |
+| `if-png` | `f=png` | Request PNG output. |
+| `if-auto` | omit `f` | Select the format from the browser's `Accept` header. |
+
+Repeated options use the last class in source order. If any Utility Class is present without a width class, the DSL supplies `w=0`. The `src` value should already be the URL that correctly displays the image, for example `{{ asset($path) }}` or `{{ Storage::url($path) }}`; the DSL transforms that resolved source URL without guessing its origin.
+
+The prefix can be changed in `config/imageforge.php`:
+
+```php
+'dsl_prefix' => 'media-',
+```
+
+Unknown prefixed classes remain in the `class` attribute. Absolute URLs, data URIs, protected template regions, and unsupported source expressions are left safe and unchanged.
 
 ### Options
 
@@ -132,66 +153,6 @@ The package does not validate or encode option values.
 `IMAGEFORGE_SERVICE` must be configured when a Forge URL is requested (`w` is present).
 
 An empty image path (`null` or `''`) returns `null` from both `storage()` and `asset()`.
-
-### Eloquent models
-
-Add the `HasImageForge` Trait and declare the image attributes that should receive generated methods:
-
-```php
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-use Replworks\ImageForge\Concerns\HasImageForge;
-
-class Template extends Model
-{
-    use HasImageForge;
-
-    protected array $imageForgeFields = [
-        'preview_path',
-        'thumbnail_path',
-    ];
-}
-```
-
-The declared fields become `previewPathImageForge()` and `thumbnailPathImageForge()`:
-
-```php
-$url = $template->previewPathImageForge(w: 320, h: 240)->storage();
-```
-
-Generated methods read the raw stored attribute value and do not require Eloquent casts.
-
-### Eloquent Attribute accessors
-
-You can also return an ImageForge Builder from a Laravel `Attribute` accessor without using the `HasImageForge` Trait:
-
-```php
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Model;
-use Replworks\ImageForge\ImageForge;
-
-class Template extends Model
-{
-    protected function previewPathImageForge(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value, array $attributes) =>
-                ImageForge::make($attributes['preview_path'] ?? null, w: 320),
-        );
-    }
-}
-```
-
-Access the resulting Builder as an Eloquent attribute:
-
-```php
-$url = $template->preview_path_image_forge->storage();
-```
-
-This approach uses property access and configures the Builder inside the accessor. It does not provide a generated method that accepts per-call options like `previewPathImageForge(w: 320)`.
 
 ## Testing
 
