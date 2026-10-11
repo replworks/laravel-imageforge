@@ -1,5 +1,13 @@
 # Release Notes
 
+## v2.0.0 - 2026-10-11
+
+### What's Changed
+
+* feat: update imageForge package to utilize Blade Utility Classes for image processing by [@cable8mm](https://github.com/cable8mm) in https://github.com/replworks/laravel-imageforge/pull/15
+
+**Full Changelog**: https://github.com/replworks/laravel-imageforge/compare/v1.1.0...v2.0.0
+
 ## v1.1.0 - 2026-10-10
 
 ### What's Changed
