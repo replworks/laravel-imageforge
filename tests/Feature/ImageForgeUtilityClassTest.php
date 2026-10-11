@@ -39,10 +39,11 @@ class ImageForgeUtilityClassTest extends TestCase
             ['id' => '42'],
         );
 
-        $this->assertSame(
-            '<img  src="https://img.repl.net/wifinote/img/42.jpg?w=480">',
+        $this->assertMatchesRegularExpression(
+            '/<img\s+src="https:\/\/img\.repl\.net\/wifinote\/img\/42\.jpg\?w=480">/',
             $rendered,
         );
+        $this->assertStringNotContainsString('class=', $rendered);
     }
 
     public function test_it_accepts_a_resolved_source_expression_in_a_quoted_or_unquoted_src(): void
@@ -129,12 +130,11 @@ BLADE;
     />
 BLADE);
 
-        $this->assertSame(<<<'HTML'
-<img
-    
-    src="https://img.repl.net/wifinote/photo.jpg?w=480&amp;f=avif"
-    />
-HTML, $rendered);
+        $this->assertMatchesRegularExpression(
+            '/<img\s+src="https:\/\/img\.repl\.net\/wifinote\/photo\.jpg\?w=480&amp;f=avif"\s*\/>/',
+            $rendered,
+        );
+        $this->assertStringNotContainsString('class=', $rendered);
     }
 
     public function test_it_leaves_a_mixed_src_unchanged_when_it_cannot_parse_it(): void
