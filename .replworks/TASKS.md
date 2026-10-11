@@ -80,29 +80,11 @@ Spec IDs (FR-, ERR-, AC-, SCR-, EL-) refer to PRODUCT_SPEC.md. INV-, F-, RD-, R-
     - The result's Origin Path comes from the asset-based Source URL, not the storage-based one (FR-015).
     - Unit tests passing.
 
-- [X] T-007 Developer calls a generated method per declared model field
-  - Satisfies: PRODUCT_SPEC.md SCR-002 (EL-004, EL-005, EL-006); FR-031, FR-033, FR-034, FR-035, FR-036, FR-039
-  - External boundary: no
-  - Acceptance criteria:
-    - AC-017 passes.
-    - AC-018 passes.
-    - AC-019 passes.
-    - AC-022 passes.
-    - A generated method uses the raw stored value even when the model defines an accessor for that attribute (ARCHITECTURE.md INV-11, RD-02).
-    - A declared field whose raw value is neither a string nor null raises an error at the generated-method call and returns no Builder (ARCHITECTURE.md F-04, INV-12, RD-03).
-    - A declared field whose raw value is null or the empty string returns a Builder whose resolution returns null (ARCHITECTURE.md INV-02).
-    - Method-name matching follows ARCHITECTURE.md Section 6.2.
-    - Unit tests passing.
+- [X] T-007 Model Trait integration (superseded before first release)
+  - The pre-release product scope no longer includes model field binding or the HasImageForge Trait.
 
-- [X] T-008 Calls for undeclared fields and for a default-field method are not handled by the product
-  - Satisfies: PRODUCT_SPEC.md SCR-002; FR-037, FR-038; ERR-002
-  - External boundary: no
-  - Acceptance criteria:
-    - AC-020 passes.
-    - AC-021 passes.
-    - For an undeclared name, the error comes from the Host and the product raises no error of its own (ARCHITECTURE.md F-03, INV-10).
-    - A model that uses the integration but declares no fields handles every such call as ERR-002 (ARCHITECTURE.md RD-14).
-    - Unit tests passing.
+- [X] T-008 Undeclared model field handling (superseded before first release)
+  - The pre-release product scope no longer includes model field binding.
 
 - [X] T-009 README first-line slot states the package is a client for the Image Forge service
   - Satisfies: PRODUCT_SPEC.md FR-041
@@ -111,22 +93,18 @@ Spec IDs (FR-, ERR-, AC-, SCR-, EL-) refer to PRODUCT_SPEC.md. INV-, F-, RD-, R-
     - AC-027 passes.
     - The wording beyond what AC-027 checks is not part of this task (human-owned, AGENTS.md HUMAN_OWNED_CHANGES).
 
-- [X] T-010 Developer generates Forge URLs with Blade directives
-  - Satisfies: PRODUCT_SPEC.md SCR-005 (EL-011, EL-012); FR-042, FR-043, FR-044
-  - External boundary: no
-  - Acceptance criteria:
-    - `@imageForgeAsset()` renders the HTML-escaped result of `ImageForge::make(...)->asset()`.
-    - `@imageForgeStorage()` renders the HTML-escaped result of `ImageForge::make(...)->storage()`.
-    - Both directives support positional and named Options.
-    - Empty paths render no URL, and existing Builder errors propagate.
-    - Unit tests passing.
+- [X] T-010 Blade directive integration (superseded before first release)
+  - The pre-release product scope uses the Utility Class DSL instead of custom directives.
 
-- [X] T-011 Developer captures Forge URLs with raw Blade directives
-  - Satisfies: PRODUCT_SPEC.md SCR-005 (EL-013, EL-014); FR-045, FR-046, FR-047
+- [X] T-011 Raw Blade directive integration (superseded before first release)
+  - The pre-release product scope uses escaped DSL output and provides no raw directives.
+
+- [X] T-012 Developer configures Image Forge URLs with Blade Utility Classes
+  - Satisfies: PRODUCT_SPEC.md Utility Class DSL and Acceptance criteria.
   - External boundary: no
   - Acceptance criteria:
-    - `@imageForgeAssetRaw()` renders the unescaped result of `ImageForge::make(...)->asset()`.
-    - `@imageForgeStorageRaw()` renders the unescaped result of `ImageForge::make(...)->storage()`.
-    - Both raw directives support positional and named Options.
-    - Empty paths render no URL.
+    - `Dsl::parse()` maps recognized classes, clamps numeric values, honors source order, and preserves unknown prefixed classes.
+    - The service provider registers a compile-time template scanner.
+    - Eligible static and dynamic `<img>` sources render escaped Forge URLs through `Dsl::url()` and the existing Builder.
+    - Storage selection, default width, absolute URL passthrough, protected regions, and unsupported source expressions follow PRODUCT_SPEC.md.
     - Unit tests passing.

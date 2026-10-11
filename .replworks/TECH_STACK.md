@@ -7,10 +7,9 @@
 - Package manager: composer.
 - Runtime dependency `illuminate/support` `^12.0`. Reason: service provider base class, Storage facade.
 - Runtime dependency `illuminate/contracts` `^12.0`. Reason: config repository contract.
-- Runtime dependency `illuminate/database` `^12.0`. Reason: Eloquent Model that the Trait attaches to.
 - Runtime dependency `illuminate/filesystem` `^12.0`. Reason: storage disk manager that provides disk URLs.
 - Runtime dependency `illuminate/routing` `^12.0`. Reason: URL generator implementation behind `asset()`.
-- Runtime dependency `illuminate/view` `^12.0`. Reason: registering the package's Blade directives.
+- Runtime dependency `illuminate/view` `^12.0`. Reason: registering the package's Blade precompiler.
 - Development dependency `phpunit/phpunit` `^11.5.3 || ^12.0.1`. Reason: test runner, range accepted by Testbench 10.
 - Development dependency `orchestra/testbench` `^10.0`. Reason: boots a Laravel application for package tests.
 - Development dependency `laravel/pint`, latest 1.x release (`^1.0`). Reason: code formatter.
