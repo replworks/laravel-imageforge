@@ -58,18 +58,79 @@ php artisan vendor:publish --tag=imageforge-config
 
 This creates `config/imageforge.php` with the following settings:
 
-| Setting               | Environment variable  | Default                  |
-| --------------------- | --------------------- | ------------------------ |
-| `imageforge.base_url` | `IMAGEFORGE_BASE_URL` | `https://img.repl.net`   |
-| `imageforge.service`  | `IMAGEFORGE_SERVICE`  | none                     |
-| `imageforge.disk`     | `IMAGEFORGE_DISK`     | application default disk |
+| Setting                 | Environment variable  | Default                  |
+| ----------------------- | --------------------- | ------------------------ |
+| `imageforge.base_url`   | `IMAGEFORGE_BASE_URL` | `https://img.repl.net`   |
+| `imageforge.service`    | `IMAGEFORGE_SERVICE`  | none                     |
+| `imageforge.disk`       | `IMAGEFORGE_DISK`     | application default disk |
 | `imageforge.dsl_prefix` | none                  | `if-`                    |
 
 ## Usage
 
-Create a Builder with `ImageForge::make()`. The arguments are `path`, `w`, `h`, `fit`, `q`, and `f`, in that order. Named arguments are supported.
+For Blade view markup, use the Utility Class DSL below. Do not add `ImageForge::make()` calls to ordinary Blade `<img>` tags; the direct PHP API is only for advanced non-standard output.
 
-### Storage URLs
+### Blade Utility Class DSL
+
+For ordinary Blade images, add Utility Classes to the `<img>` element. The tag is scanned when Blade compiles the view, and the URL is resolved when the compiled view renders:
+
+```blade
+<img src="/images/photo.jpg" class="rounded if-w-480 if-h-320 if-crop" alt="">
+<img src="{{ asset('images/photo.jpg') }}" class="rounded if-w-480 if-h-320 if-crop" alt="">
+<img src="{{ Storage::url('images/photo.jpg') }}" class="rounded if-w-480 if-h-320 if-crop" alt="">
+```
+
+This renders an escaped URL like:
+
+```html
+<img
+  src="https://img.repl.net/wifinote/images/photo.jpg?w=480&amp;h=320&amp;fit=fill"
+  class="rounded"
+  alt=""
+/>
+<img
+  src="https://img.repl.net/wifinote/images/photo.jpg?w=480&amp;h=320&amp;fit=fill"
+  class="rounded"
+  alt=""
+/>
+<img
+  src="https://img.repl.net/wifinote/storage/images/photo.jpg?w=480&amp;h=320&amp;fit=fill"
+  class="rounded"
+  alt=""
+/>
+```
+
+Supported Utility Classes are:
+
+| Utility Class    | Image Forge option | Description                                           |
+| ---------------- | ------------------ | ----------------------------------------------------- |
+| `if-w-{0..2000}` | `w={n}`            | Width; values are clamped to `0..2000`.               |
+| `if-h-{0..2000}` | `h={n}`            | Height; values are clamped to `0..2000`.              |
+| `if-q-{1..100}`  | `q={n}`            | Quality; values are clamped to `1..100`.              |
+| `if-fit`         | `fit=fit`          | Fit without cropping.                                 |
+| `if-fill`        | `fit=fill`         | Fill the requested dimensions.                        |
+| `if-crop`        | `fit=fill`         | Alias for `if-fill`.                                  |
+| `if-fit-auto`    | `fit=auto`         | Let Image Forge choose the fit behavior.              |
+| `if-webp`        | `f=webp`           | Request WebP output.                                  |
+| `if-avif`        | `f=avif`           | Request AVIF output.                                  |
+| `if-jpeg`        | `f=jpeg`           | Request JPEG output.                                  |
+| `if-png`         | `f=png`            | Request PNG output.                                   |
+| `if-auto`        | omit `f`           | Select the format from the browser's `Accept` header. |
+
+Repeated options use the last class in source order. If any Utility Class is present without a width class, the DSL supplies `w=0`. The `src` value should already be the URL that correctly displays the image, for example `{{ asset($path) }}` or `{{ Storage::url($path) }}`; the DSL transforms that resolved source URL without guessing its origin.
+
+The prefix can be changed in `config/imageforge.php`:
+
+```php
+'dsl_prefix' => 'media-',
+```
+
+Unknown prefixed classes remain in the `class` attribute. Protected template regions and unsupported source expressions are left safe and unchanged.
+
+### Direct PHP API (advanced)
+
+Use `ImageForge::make()` only when generating an image URL outside the normal Blade `<img>` workflow, such as email templates, API responses, `srcset`, or other computed output. Its arguments are `path`, `w`, `h`, `fit`, `q`, and `f`, in that order. Named arguments are supported.
+
+#### Storage URLs
 
 Call `storage()` to use the configured Laravel filesystem disk as the Source URL:
 
@@ -80,13 +141,9 @@ $url = ImageForge::make('templates/preview.png', 320)->storage();
 // https://img.repl.net/wifinote/storage/templates/preview.png?w=320
 ```
 
-When `w` is omitted, `storage()` returns the original storage URL:
+When `w` is omitted, `storage()` returns the original storage URL.
 
-```php
-$url = ImageForge::make('templates/preview.png')->storage();
-```
-
-### Asset URLs
+#### Asset URLs
 
 Call `asset()` to use Laravel's `asset()` URL as the Source URL:
 
@@ -95,48 +152,7 @@ $url = ImageForge::make('templates/preview.png', 320)->asset();
 // https://img.repl.net/wifinote/templates/preview.png?w=320
 ```
 
-### Blade Utility Class DSL
-
-For ordinary Blade images, add Utility Classes to the `<img>` element. The tag is scanned when Blade compiles the view, and the URL is resolved when the compiled view renders:
-
-```blade
-<img src="/images/photo.jpg" class="rounded if-w-480 if-h-320 if-crop" alt="">
-```
-
-This renders an escaped URL like:
-
-```html
-<img src="https://img.repl.net/wifinote/images/photo.jpg?w=480&amp;h=320&amp;fit=fill" class="rounded" alt="">
-```
-
-Supported Utility Classes are:
-
-| Utility Class | Image Forge option | Description |
-| --- | --- | --- |
-| `if-w-{0..2000}` | `w={n}` | Width; values are clamped to `0..2000`. |
-| `if-h-{0..2000}` | `h={n}` | Height; values are clamped to `0..2000`. |
-| `if-q-{1..100}` | `q={n}` | Quality; values are clamped to `1..100`. |
-| `if-fit` | `fit=fit` | Fit without cropping. |
-| `if-fill` | `fit=fill` | Fill the requested dimensions. |
-| `if-crop` | `fit=fill` | Alias for `if-fill`. |
-| `if-fit-auto` | `fit=auto` | Let Image Forge choose the fit behavior. |
-| `if-webp` | `f=webp` | Request WebP output. |
-| `if-avif` | `f=avif` | Request AVIF output. |
-| `if-jpeg` | `f=jpeg` | Request JPEG output. |
-| `if-png` | `f=png` | Request PNG output. |
-| `if-auto` | omit `f` | Select the format from the browser's `Accept` header. |
-
-Repeated options use the last class in source order. If any Utility Class is present without a width class, the DSL supplies `w=0`. The `src` value should already be the URL that correctly displays the image, for example `{{ asset($path) }}` or `{{ Storage::url($path) }}`; the DSL transforms that resolved source URL without guessing its origin.
-
-The prefix can be changed in `config/imageforge.php`:
-
-```php
-'dsl_prefix' => 'media-',
-```
-
-Unknown prefixed classes remain in the `class` attribute. Absolute URLs, data URIs, protected template regions, and unsupported source expressions are left safe and unchanged.
-
-### Options
+#### Options
 
 Options are rendered in the order `w`, `h`, `fit`, `q`, `f`. Options with a `null` value are omitted.
 
