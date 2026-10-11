@@ -5,6 +5,10 @@ This package is a client for the Image Forge service.
 [![code-style](https://github.com/replworks/laravel-imageforge/actions/workflows/code-style.yml/badge.svg)](https://github.com/replworks/laravel-imageforge/actions/workflows/code-style.yml)
 [![tests](https://github.com/replworks/laravel-imageforge/actions/workflows/tests.yml/badge.svg)](https://github.com/replworks/laravel-imageforge/actions/workflows/tests.yml)
 [![update-changelog](https://github.com/replworks/laravel-imageforge/actions/workflows/update-changelog.yml/badge.svg)](https://github.com/replworks/laravel-imageforge/actions/workflows/update-changelog.yml)
+[![Packagist Version](https://img.shields.io/packagist/v/replworks/laravel-imageforge.svg)](https://packagist.org/packages/replworks/laravel-imageforge)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/replworks/laravel-imageforge.svg)](https://packagist.org/packages/replworks/laravel-imageforge)
+[![PHP Version](https://img.shields.io/packagist/php-v/replworks/laravel-imageforge.svg)](https://packagist.org/packages/replworks/laravel-imageforge)
+[![License](https://img.shields.io/packagist/l/replworks/laravel-imageforge.svg)](https://packagist.org/packages/replworks/laravel-imageforge)
 
 Laravel ImageForge is the Laravel client library for [Image Forge](https://if.repl.net), an image conversion service. It generates Image Forge URLs from Blade image classes or direct application code.
 
@@ -96,13 +100,13 @@ $url = ImageForge::make('templates/preview.png', 320)->asset();
 For ordinary Blade images, add Utility Classes to the `<img>` element. The tag is scanned when Blade compiles the view, and the URL is resolved when the compiled view renders:
 
 ```blade
-<img src="photo.jpg" class="rounded if-w-480 if-h-320 if-crop" alt="">
+<img src="/images/photo.jpg" class="rounded if-w-480 if-h-320 if-crop" alt="">
 ```
 
 This renders an escaped URL like:
 
 ```html
-<img src="https://img.repl.net/wifinote/photo.jpg?w=480&amp;h=320&amp;fit=fill" class="rounded" alt="">
+<img src="https://img.repl.net/wifinote/images/photo.jpg?w=480&amp;h=320&amp;fit=fill" class="rounded" alt="">
 ```
 
 Supported Utility Classes are:
