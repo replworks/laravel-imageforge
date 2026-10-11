@@ -5,6 +5,10 @@ This package is a client for the Image Forge service.
 [![code-style](https://github.com/replworks/laravel-imageforge/actions/workflows/code-style.yml/badge.svg)](https://github.com/replworks/laravel-imageforge/actions/workflows/code-style.yml)
 [![tests](https://github.com/replworks/laravel-imageforge/actions/workflows/tests.yml/badge.svg)](https://github.com/replworks/laravel-imageforge/actions/workflows/tests.yml)
 [![update-changelog](https://github.com/replworks/laravel-imageforge/actions/workflows/update-changelog.yml/badge.svg)](https://github.com/replworks/laravel-imageforge/actions/workflows/update-changelog.yml)
+[![Packagist Version](https://img.shields.io/packagist/v/replworks/laravel-imageforge.svg)](https://packagist.org/packages/replworks/laravel-imageforge)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/replworks/laravel-imageforge.svg)](https://packagist.org/packages/replworks/laravel-imageforge)
+[![PHP Version](https://img.shields.io/packagist/php-v/replworks/laravel-imageforge.svg)](https://packagist.org/packages/replworks/laravel-imageforge)
+[![License](https://img.shields.io/packagist/l/replworks/laravel-imageforge.svg)](https://packagist.org/packages/replworks/laravel-imageforge)
 
 Laravel ImageForge is the Laravel client library for [Image Forge](https://if.repl.net), an image conversion service. It generates Image Forge URLs from Blade image classes or direct application code.
 
