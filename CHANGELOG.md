@@ -1,5 +1,15 @@
 # Release Notes
 
+## v2.0.1 - 2026-10-14
+
+### What's Changed
+
+* docs: update image paths in readme by [@cable8mm](https://github.com/cable8mm) in https://github.com/replworks/laravel-imageforge/pull/16
+* docs: refine README for Blade Utility Class usage and PHP API examples by [@cable8mm](https://github.com/cable8mm) in https://github.com/replworks/laravel-imageforge/pull/17
+* feat: support PHP 8.4 and Laravel 13 in composer.json and CI configuration by [@cable8mm](https://github.com/cable8mm) in https://github.com/replworks/laravel-imageforge/pull/18
+
+**Full Changelog**: https://github.com/replworks/laravel-imageforge/compare/v2.0.0...v2.0.1
+
 ## v2.0.0 - 2026-10-11
 
 ### What's Changed
