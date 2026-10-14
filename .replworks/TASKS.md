@@ -108,3 +108,19 @@ Spec IDs (FR-, ERR-, AC-, SCR-, EL-) refer to PRODUCT_SPEC.md. INV-, F-, RD-, R-
     - Eligible static and dynamic `<img>` sources render escaped Forge URLs through `Dsl::url()` and the existing Builder.
     - Storage selection, default width, absolute URL passthrough, protected regions, and unsupported source expressions follow PRODUCT_SPEC.md.
     - Unit tests passing.
+
+- [X] T-013 Package supports Laravel 13 alongside Laravel 12
+  - Satisfies: PRODUCT_SPEC.md Constraints (Laravel and PHP requirements)
+  - External boundary: no
+  - Acceptance criteria:
+    - `composer.json` allows `illuminate/*` `^12.0|^13.0` and `orchestra/testbench` `^10.0|^11.0`.
+    - CI runs PHPUnit on Laravel `12.*` with Testbench `10.*` and Laravel `13.*` with Testbench `11.*`.
+    - Unit tests passing on both Laravel versions.
+
+- [X] T-014 Package supports PHP 8.4 alongside PHP 8.3
+  - Satisfies: PRODUCT_SPEC.md Constraints (Laravel and PHP requirements)
+  - External boundary: no
+  - Acceptance criteria:
+    - `composer.json` PHP constraint allows PHP `8.3` and `8.4`.
+    - CI runs PHPUnit on PHP `8.3`/`8.4` with Laravel `12.*` and PHP `8.4` with Laravel `13.*`.
+    - Unit tests passing on PHP `8.3` and `8.4`.

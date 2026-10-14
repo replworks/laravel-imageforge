@@ -3,15 +3,15 @@
 ## 1. Languages / runtimes / frameworks / libraries
 
 - Language: PHP, version constraint `^8.3`.
-- Framework: Laravel, version constraint `^12.0`.
+- Framework: Laravel, version constraint `^12.0|^13.0`.
 - Package manager: composer.
-- Runtime dependency `illuminate/support` `^12.0`. Reason: service provider base class, Storage facade.
-- Runtime dependency `illuminate/contracts` `^12.0`. Reason: config repository contract.
-- Runtime dependency `illuminate/filesystem` `^12.0`. Reason: storage disk manager that provides disk URLs.
-- Runtime dependency `illuminate/routing` `^12.0`. Reason: URL generator implementation behind `asset()`.
-- Runtime dependency `illuminate/view` `^12.0`. Reason: registering the package's Blade precompiler.
-- Development dependency `phpunit/phpunit` `^11.5.3 || ^12.0.1`. Reason: test runner, range accepted by Testbench 10.
-- Development dependency `orchestra/testbench` `^10.0`. Reason: boots a Laravel application for package tests.
+- Runtime dependency `illuminate/support` `^12.0|^13.0`. Reason: service provider base class, Storage facade.
+- Runtime dependency `illuminate/contracts` `^12.0|^13.0`. Reason: config repository contract.
+- Runtime dependency `illuminate/filesystem` `^12.0|^13.0`. Reason: storage disk manager that provides disk URLs.
+- Runtime dependency `illuminate/routing` `^12.0|^13.0`. Reason: URL generator implementation behind `asset()`.
+- Runtime dependency `illuminate/view` `^12.0|^13.0`. Reason: registering the package's Blade precompiler.
+- Development dependency `phpunit/phpunit` `^11.5.3 || ^12.0.1`. Reason: test runner, range accepted by Testbench 10 and 11.
+- Development dependency `orchestra/testbench` `^10.0|^11.0`. Reason: boots a Laravel application for package tests.
 - Development dependency `laravel/pint`, latest 1.x release (`^1.0`). Reason: code formatter.
 - Module system: PSR-4 autoload, namespace `Replworks\ImageForge\` mapped to `src/`.
 - Test autoload: PSR-4 autoload-dev, namespace `Replworks\ImageForge\Tests\` mapped to `tests/`.
@@ -57,7 +57,7 @@
 - Releases MUST be GitHub releases with semver tags in the format `vMAJOR.MINOR.PATCH`, for example `v1.0.0`.
 - Packagist MUST update automatically when a GitHub release is published.
 - CI MUST be GitHub Actions.
-- The CI matrix MUST be PHP `8.3` x Laravel `12.*` x Testbench `10.*`.
+- The CI matrix MUST be PHP `8.3`/`8.4` x Laravel `12.*` x Testbench `10.*` plus PHP `8.4` x Laravel `13.*` x Testbench `11.*` (upstream `symfony/*` `8.x` requires PHP `>=8.4.1`, so PHP `8.3` x Laravel `13.*` is excluded).
 - CI MUST resolve dependencies with `--prefer-stable`.
 - CI MUST run PHPUnit.
 - License MUST be MIT.
