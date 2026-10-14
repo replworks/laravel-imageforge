@@ -1,5 +1,3 @@
-This package is a client for the Image Forge service.
-
 # Laravel ImageForge
 
 [![code-style](https://github.com/replworks/laravel-imageforge/actions/workflows/code-style.yml/badge.svg)](https://github.com/replworks/laravel-imageforge/actions/workflows/code-style.yml)
@@ -16,6 +14,8 @@ Image Forge is built in the REPLWorks way. The service and its making are introd
 
 Official Image Forge service guidance and settings can be found at [if.repl.net](https://if.repl.net).
 
+This package is used in production by [wifinote.net](https://wifinote.net) and [repl.net](https://www.repl.net).
+
 ## Prerequisite
 
 Before using this package, register your application's domain with Image Forge at [if.repl.net](https://if.repl.net). Use the service identifier issued for that registered domain as `IMAGEFORGE_SERVICE` in your Laravel application.
@@ -23,7 +23,7 @@ Before using this package, register your application's domain with Image Forge a
 ## Requirements
 
 - PHP 8.3 or later
-- Laravel 12.x
+- Laravel 12.x or 13.x
 
 ## Installation
 
