@@ -277,7 +277,7 @@ class UtilityClassPrecompiler
 
     private static function protectedEnd(string $template, int $offset): ?int
     {
-        if (substr($template, $offset, 6) === '@php(') {
+        if (substr($template, $offset, 5) === '@php(') {
             $quote = null;
             $parentheses = 1;
             $length = strlen($template);

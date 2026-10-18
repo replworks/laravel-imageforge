@@ -121,6 +121,20 @@ BLADE;
         $this->assertSame(3, substr_count($rendered, 'if-w-480'));
     }
 
+    public function test_it_still_rewrites_img_tags_after_an_inline_php_directive(): void
+    {
+        $rendered = Blade::render(
+            "@php(\$label = 'thumbnail')\n".
+            '<img src="photo.jpg" class="if-w-320">',
+        );
+
+        $this->assertStringContainsString(
+            'src="https://img.repl.net/wifinote/photo.jpg?w=320"',
+            $rendered,
+        );
+        $this->assertStringNotContainsString('class=', $rendered);
+    }
+
     public function test_it_supports_multiline_and_single_quoted_tags(): void
     {
         $rendered = Blade::render(<<<'BLADE'
