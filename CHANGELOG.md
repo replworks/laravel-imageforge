@@ -1,5 +1,17 @@
 # Release Notes
 
+## v2.0.2 - 2026-10-18
+
+### What's Changed
+
+* fix(blade): stop inline [@php](https://github.com/php)(...) from swallowing the rest of the file by [@replworks-bot](https://github.com/replworks-bot) in https://github.com/replworks/laravel-imageforge/pull/19
+
+### New Contributors
+
+* [@replworks-bot](https://github.com/replworks-bot) made their first contribution in https://github.com/replworks/laravel-imageforge/pull/19
+
+**Full Changelog**: https://github.com/replworks/laravel-imageforge/compare/v2.0.1...v2.0.2
+
 ## v2.0.1 - 2026-10-14
 
 ### What's Changed
